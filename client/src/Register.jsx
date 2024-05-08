@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
+import { UserContext } from "./UserContext";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const {setUsername:setLoggedInUsername, setId} = useContext(UserContext);
 
   async function register(ev) {
     ev.preventDefault();
     try {
-      const response = await axios.post('/register', {username, password});
+      const data = await axios.post('/register', {username, password});
       // Handle success response here (e.g., display success message or redirect)
-      console.log("Registration successful", response);
+      setLoggedInUsername(username);
+      setId(data.id);
+      console.log("Registration successful", data);
     } catch (err) {
       // Handle error
       setError(err.message);
