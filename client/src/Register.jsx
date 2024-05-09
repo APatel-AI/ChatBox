@@ -1,23 +1,22 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./UserContext.jsx";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const {setUsername:setLoggedInUsername, setId} = useContext(UserContext);
+  const { setLoggedInUsername, setId } = useContext(UserContext);
 
   async function register(ev) {
     ev.preventDefault();
     try {
-      const data = await axios.post('/register', {username, password});
-      // Handle success response here (e.g., display success message or redirect)
-      setLoggedInUsername(username);
+      const response = await axios.post('/register', { username, password });
+      const data = response.data;
+      setLoggedInUsername(username); // Ensure setLoggedInUsername is defined in the context
       setId(data.id);
       console.log("Registration successful", data);
     } catch (err) {
-      // Handle error
       setError(err.message);
     }
   }
@@ -27,7 +26,7 @@ const Register = () => {
       <form className="w-64 mx-auto " onSubmit={register}>
         <input
           value={username}
-          onChange={ev => setUsername(ev.target.value)}
+          onChange={(ev) => setUsername(ev.target.value)}
           type="text"
           placeholder="username"
           className="block w-full bg-gray-800 p-2 mb-2 border border-gray-700 hover:bg-gray-700 rounded-sm"
@@ -36,7 +35,7 @@ const Register = () => {
 
         <input
           value={password}
-          onChange={ev => setPassword(ev.target.value)}
+          onChange={(ev) => setPassword(ev.target.value)}
           type="password"
           placeholder="password"
           className="block w-full bg-gray-800 p-2 mb-2 border border-gray-700 hover:bg-gray-700 rounded-sm"
