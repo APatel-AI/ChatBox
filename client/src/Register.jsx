@@ -6,7 +6,7 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { setLoggedInUsername, setId } = useContext(UserContext);
+  const {setUsername:setLoggedInUsername, setId } = useContext(UserContext);
 
   async function register(ev) {
     ev.preventDefault();
@@ -42,7 +42,7 @@ const Register = () => {
           required
         />
 
-        {/* {error && <p className="text-red-500">{error}</p>} */}
+        {error && <p className="text-red-500">{error}</p>}
 
         <button className="bg-gray-600 w-full p-2 text-white block rounded-sm">
           Register
