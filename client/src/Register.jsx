@@ -42,7 +42,7 @@ const Register = () => {
           required
         />
 
-        {error && <p className="text-red-500">{error}</p>}
+        {/* {error && <p className="text-red-500">{error}</p>} */}
 
         <button className="bg-gray-600 w-full p-2 text-white block rounded-sm">
           Register
